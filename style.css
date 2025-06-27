@@ -15,6 +15,7 @@ body {
 }
 
 .video-background-container {
+    filter: blur(4px);
     position: fixed;
     top: 0;
     left: 0;
