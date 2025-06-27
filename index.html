@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <div class="video-background-container">
+        <video autoplay muted loop playsinline id="background-video" src="https://cdn.leonardo.ai/users/8e04fecd-d8db-4793-a908-a211763bc951/generations/b3c2072f-b032-4323-81aa-453dae8d8714/b3c2072f-b032-4323-81aa-453dae8d8714.mp4">
+            <!-- Provide a fallback image or message if video is not supported -->
+        </video>
+    </div>
+
     <header>
         <nav>
             <ul>
@@ -22,24 +28,62 @@
     <main>
         <section id="side-projects">
             <h2>Side Projects</h2>
-            <div class="projects-container">
-                <!-- Placeholder Project 1 -->
-                <div class="project-card">
-                    <img src="images/placeholder_project_thumb.png" alt="Project Thumbnail">
-                    <h3>Project Alpha: Algo Trading Strategy</h3>
-                    <p><strong>Language:</strong> Python (Pandas, NumPy, Matplotlib)</p>
-                    <p class="project-description">Developed and backtested a mean-reversion trading strategy for equities. Achieved a simulated Sharpe ratio of 1.5.</p>
-                    <a href="template_project_detail.html?project=alpha" class="btn">View Details</a>
+            <div class="projects-outer-container"> <!-- Added outer container for overflow control -->
+                <div class="projects-container">
+                    <!-- Placeholder Project 1 (repeated for scrolling effect demonstration) -->
+                    <div class="project-card">
+                        <img src="images/placeholder_project_thumb.png" alt="Project Thumbnail">
+                        <h3>Project Alpha: Algo Trading Strategy</h3>
+                        <p><strong>Language:</strong> Python (Pandas, NumPy, Matplotlib)</p>
+                        <p class="project-description">Developed and backtested a mean-reversion trading strategy for equities. Achieved a simulated Sharpe ratio of 1.5.</p>
+                        <a href="project_detail.html?project=alpha" class="btn">View Details</a>
+                    </div>
+                    <div class="project-card">
+                        <img src="images/placeholder_project_thumb_2.png" alt="Project Thumbnail 2">
+                        <h3>Project Beta: Option Pricing Model</h3>
+                        <p><strong>Language:</strong> C++, Python</p>
+                        <p class="project-description">Implemented a Black-Scholes option pricing model with various Greeks calculations. Compared performance with market data.</p>
+                        <a href="project_detail.html?project=beta" class="btn">View Details</a>
+                    </div>
+                    <div class="project-card">
+                        <img src="images/placeholder_project_thumb_3.png" alt="Project Thumbnail 3">
+                        <h3>Project Gamma: ML Stock Predictor</h3>
+                        <p><strong>Language:</strong> Python (Scikit-learn, Keras)</p>
+                        <p class="project-description">Built a machine learning model to predict short-term stock price movements using historical data and technical indicators.</p>
+                        <a href="project_detail.html?project=gamma" class="btn">View Details</a>
+                    </div>
+                    <!-- Duplicate the cards above for a seamless loop in pure CSS -->
+                    <!-- For a better solution, especially with many cards, JS is preferred to dynamically clone -->
+                    <div class="project-card">
+                        <img src="images/placeholder_project_thumb.png" alt="Project Thumbnail">
+                        <h3>Project Alpha: Algo Trading Strategy</h3>
+                        <p><strong>Language:</strong> Python (Pandas, NumPy, Matplotlib)</p>
+                        <p class="project-description">Developed and backtested a mean-reversion trading strategy for equities. Achieved a simulated Sharpe ratio of 1.5.</p>
+                        <a href="project_detail.html?project=alpha" class="btn">View Details</a>
+                    </div>
+                    <div class="project-card">
+                        <img src="images/placeholder_project_thumb_2.png" alt="Project Thumbnail 2">
+                        <h3>Project Beta: Option Pricing Model</h3>
+                        <p><strong>Language:</strong> C++, Python</p>
+                        <p class="project-description">Implemented a Black-Scholes option pricing model with various Greeks calculations. Compared performance with market data.</p>
+                        <a href="project_detail.html?project=beta" class="btn">View Details</a>
+                    </div>
+                    <div class="project-card">
+                        <img src="images/placeholder_project_thumb_3.png" alt="Project Thumbnail 3">
+                        <h3>Project Gamma: ML Stock Predictor</h3>
+                        <p><strong>Language:</strong> Python (Scikit-learn, Keras)</p>
+                        <p class="project-description">Built a machine learning model to predict short-term stock price movements using historical data and technical indicators.</p>
+                        <a href="project_detail.html?project=gamma" class="btn">View Details</a>
+                    </div>
                 </div>
-                <!-- More projects can be added here -->
             </div>
         </section>
 
         <section id="experience">
             <h2>Experience</h2>
             <div class="experience-entry">
-                <h3>Placeholder role</h3>
-                <p class="company-name">Place holder company</p>
+                <h3>Quantitative Analyst Intern</h3>
+                <p class="company-name">QuantFin Investments LLC</p>
                 <p class="date-time">June 2023 – August 2023 (3 months)</p>
                 <p class="experience-description">
                     Researched and implemented statistical arbitrage models for US equities.
@@ -56,30 +100,26 @@
             <div class="skills-container">
                 <div class="skills-column">
                     <h3>Hard Skills</h3>
-                    <ul>
-                        <li><i class="fab fa-python"></i> Python (Pandas, NumPy, SciPy, Scikit-learn)</li>
-                        <li><i class="fas fa-database"></i> SQL</li>
-                        <li><i class="fab fa-r-project"></i> R</li>
-                        <li><i class="fab fa-cplusplus"></i> C++ (Basic)</li>
-                        <li><i class="fas fa-chart-line"></i> Statistical Modeling & Time Series Analysis</li>
-                        <li><i class="fas fa-brain"></i> Machine Learning (Regression, Classification)</li>
-                        <li><i class="fas fa-file-invoice-dollar"></i> Backtesting Strategies</li>
-                        <li><i class="fas fa-shield-alt"></i> Risk Management Principles</li>
-                        <li><i class="fas fa-file-excel"></i> Excel & VBA</li>
-                        <li><i class="fab fa-git-alt"></i> Git & Version Control</li>
+                    <ul class="bubble-container">
+                        <li style="top: 10%; left: 15%; animation-duration: 10s; animation-delay: 0s;"><i class="fab fa-python"></i> Python</li>
+                        <li style="top: 30%; left: 60%; animation-duration: 12s; animation-delay: -2s;"><i class="fas fa-database"></i> SQL</li>
+                        <li style="top: 50%; left: 20%; animation-duration: 9s; animation-delay: -4s;"><i class="fab fa-r-project"></i> R</li>
+                        <li style="top: 70%; left: 70%; animation-duration: 11s; animation-delay: -6s;"><i class="fab fa-cplusplus"></i> C++</li>
+                        <li style="top: 20%; left: 35%; animation-duration: 13s; animation-delay: -1s;"><i class="fas fa-chart-line"></i> Stats</li>
+                        <li style="top: 60%; left: 40%; animation-duration: 10s; animation-delay: -3s;"><i class="fas fa-brain"></i> ML</li>
+                        <li style="top: 40%; left: 80%; animation-duration: 12s; animation-delay: -5s;"><i class="fab fa-git-alt"></i> Git</li>
+                        <li style="top: 80%; left: 10%; animation-duration: 9s; animation-delay: -7s;"><i class="fas fa-file-excel"></i> Excel</li>
                     </ul>
                 </div>
                 <div class="skills-column">
                     <h3>Soft Skills</h3>
-                    <ul>
-                        <li>Analytical Thinking</li>
-                        <li>Problem Solving</li>
-                        <li>Attention to Detail</li>
-                        <li>Quantitative Research</li>
-                        <li>Communication (Technical & Non-technical)</li>
-                        <li>Teamwork</li>
-                        <li>Adaptability</li>
-                        <li>Time Management</li>
+                    <ul class="bubble-container">
+                        <li style="top: 15%; left: 20%; animation-duration: 11s; animation-delay: -0.5s;">Analytical</li>
+                        <li style="top: 35%; left: 55%; animation-duration: 10s; animation-delay: -2.5s;">Problem Solving</li>
+                        <li style="top: 55%; left: 25%; animation-duration: 12s; animation-delay: -4.5s;">Attention Detail</li>
+                        <li style="top: 75%; left: 65%; animation-duration: 9s; animation-delay: -6.5s;">Research</li>
+                        <li style="top: 25%; left: 75%; animation-duration: 13s; animation-delay: -1.5s;">Communication</li>
+                        <li style="top: 65%; left: 10%; animation-duration: 10s; animation-delay: -3.5s;">Teamwork</li>
                     </ul>
                 </div>
             </div>

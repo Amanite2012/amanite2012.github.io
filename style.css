@@ -1,37 +1,436 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amanite's Portfolio - Project Detail</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html#side-projects">Back to Portfolio</a></li>
-            </ul>
-        </nav>
-    </header>
+/* Basic Reset */
+body, h1, h2, h3, p, ul, li, figure, figcaption {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <main>
-        <section id="project-content">
-            <h1>Project Title Placeholder</h1>
-            <img src="images/placeholder_project_large.png" alt="Project Image Large" style="width:100%; max-width:600px;">
-            <p><strong>Language/Technologies:</strong> Python, Pandas, Scikit-learn</p>
-            <h2>Problem Statement</h2>
-            <p>Detailed description of the problem this project aimed to solve.</p>
-            <h2>Methodology</h2>
-            <p>Explanation of the quantitative techniques, models, or data used.</p>
-            <h2>Results & Analysis</h2>
-            <p>Discussion of the outcomes, including key metrics, charts, or graphs (you can embed images or use libraries like Chart.js later).</p>
-            <p><a href="#">Link to GitHub Repo (if available)</a></p>
-        </section>
-    </main>
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #f0f0f0; /* Light default text color for dark background */
+    background-color: #1a1a1a; /* Fallback background */
+    padding-top: 60px; /* For fixed navbar */
+    overflow-x: hidden; /* Prevent horizontal scrollbar if animations cause overflow */
+}
 
-    <footer>
-        <p>&copy; 2024 Antoine P. | <a href="https://www.linkedin.com/in/an-petit/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
-    </footer>
-</body>
-</html>
+.video-background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -2; /* Behind all content */
+}
+
+#background-video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(8px); /* Blur effect */
+    object-fit: cover; /* Cover the area, might crop */
+}
+
+/* Optional: Add a semi-transparent overlay on top of the video but behind content, if needed for readability */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Dark overlay, adjust opacity as needed */
+    z-index: -1; /* Between video and content */
+}
+
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    max-width: 100%; /* Allow main to be full width for scroller */
+    margin: 20px auto;
+    padding: 20px 0; /* Remove side padding for full-width scroller sections */
+    /* background: #fff; Remove fixed background, sections will control their own */
+    /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
+    position: relative; /* Ensure it's above the video's pseudo-element */
+    z-index: 1;
+}
+
+section {
+    padding: 40px 20px; /* Keep vertical padding, horizontal padding for content inside section */
+    margin-bottom: 20px;
+    /* border-bottom: 1px solid #eee; */ /* Remove border, or change color for dark theme */
+    border-bottom: 1px solid #444; /* Darker border for dark theme */
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+h1, h2, h3 {
+    margin-bottom: 20px;
+    color: #e0e0e0; /* Lighter color for headings on dark background */
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+    border-bottom: 2px solid #555; /* Darker border for dark theme */
+    padding-bottom: 10px;
+    text-align: center; /* Center section titles */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px; /* Max width for centered titles */
+}
+
+h3 {
+    font-size: 1.5em;
+    color: #cccccc; /* Lighter subheading color */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(30, 30, 30, 0.8); /* Slightly transparent dark footer */
+    color: #f0f0f0; /* Light text in footer */
+    margin-top: 30px;
+    position: relative; /* Ensure it's above the video's pseudo-element */
+    z-index: 1;
+}
+
+footer a {
+    color: #6bbaff; /* Light blue for links in footer */
+}
+
+/* Utility Classes */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden; /* Clear floats */
+}
+
+.btn {
+    display: inline-block;
+    background: #337ab7; /* A common blue for buttons */
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background: #286090; /* Darker blue on hover */
+}
+
+/* Side Projects Section */
+@keyframes scrollProjects {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); } /* Scroll one full container width */
+}
+
+#side-projects {
+    overflow: hidden; /* Hide the parts of cards that are outside the viewport */
+    padding: 40px 0; /* Remove horizontal padding from section if container handles it */
+}
+
+#side-projects .projects-outer-container {
+    width: 100%;
+    overflow: hidden; /* Crucial for marquee effect */
+}
+
+#side-projects .projects-container {
+    display: flex; /* Lay out cards in a row */
+    width: max-content; /* Allow container to be as wide as all its children */
+    animation: scrollProjects 40s linear infinite; /* Adjust time for speed */
+    gap: 20px; /* Space between cards */
+    padding: 0 20px; /* Padding so cards don't stick to edges initially */
+}
+
+/* To make the scroll seamless, duplicate the project cards if you have few.
+   If using JS, this can be done dynamically. For pure CSS, you'd manually duplicate.
+   Assuming enough cards for now to show the effect. If not, the illusion breaks.
+   Or, pause on hover: */
+#side-projects .projects-container:hover {
+    animation-play-state: paused;
+}
+
+
+.project-card {
+    background: rgba(40, 40, 40, 0.85); /* Darker, semi-transparent card background */
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 20px;
+    width: 320px; /* Fixed width for scrolling items */
+    min-width: 300px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    color: #e0e0e0; /* Light text for cards */
+}
+
+.project-card img {
+    max-width: 100%;
+    height: 180px; /* Fixed height for consistency */
+    border-bottom: 1px solid #444;
+    margin-bottom: 15px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.project-card h3 {
+    font-size: 1.3em;
+    color: #7fdbff; /* Brighter blue for card titles */
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    flex-grow: 1;
+    color: #c0c0c0; /* Lighter paragraph text */
+}
+
+.project-card .project-description {
+    font-size: 0.95em;
+    color: #b0b0b0; /* Slightly dimmer description */
+}
+
+.project-card .btn { /* Ensure button is visible on dark card */
+    background: #007bff;
+    color: #ffffff;
+}
+.project-card .btn:hover {
+    background: #0056b3;
+}
+
+
+/* Experience Section */
+.experience-entry {
+    background: rgba(45, 45, 45, 0.8); /* Darker, semi-transparent */
+    padding: 20px;
+    border-left: 5px solid #337ab7;
+    margin-bottom: 20px;
+}
+
+.experience-entry h3 {
+    font-size: 1.4em;
+    color: #333;
+}
+
+.experience-entry .company-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.experience-entry .date-time {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.experience-entry .experience-description {
+    font-size: 1em;
+    color: #444;
+}
+
+/* Skills Section */
+#skills .skills-container {
+    display: flex;
+    justify-content: space-around; /* Puts space between columns */
+    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+    gap: 20px;
+}
+
+.skills-column {
+    background: #fff;
+    padding: 20px;
+    /* border: 1px solid #eee; */
+    border: 1px solid #444; /* Darker border */
+    border-radius: 10px; /* Slightly more rounded */
+    width: 45%; /* Each column takes up roughly half the space */
+    min-width: 280px; /* Minimum width before wrapping */
+    /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* Enhanced shadow for dark theme */
+    background: rgba(50, 50, 50, 0.7); /* Semi-transparent dark background for columns */
+    position: relative; /* Needed for absolute positioning of bubbles */
+    overflow: hidden; /* Keep bubbles contained */
+    min-height: 300px; /* Ensure columns have some height for bubbles to float in */
+}
+
+.skills-column h3 {
+    font-size: 1.4em; /* Slightly larger */
+    color: #7fdbff; /* Bright blue, same as project card titles */
+    /* border-bottom: 1px solid #eee; */
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+    margin-bottom: 20px; /* More space before bubbles start */
+    text-align: center;
+}
+
+.skills-column ul {
+    list-style: none;
+    padding-left: 0;
+    position: relative; /* Container for absolute positioned li */
+    height: 100%; /* Allow ul to fill column for positioning */
+    min-height: 200px; /* Ensure space for bubbles */
+}
+
+.skills-column ul li {
+    position: absolute; /* Key for floating effect */
+    display: flex;
+    flex-direction: column; /* Stack icon and text vertically if needed, or keep side-by-side */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(60, 130, 190, 0.8); /* Bubble color - a bluish tone */
+    color: #fff;
+    padding: 15px 10px; /* Adjust padding for bubble feel */
+    border-radius: 50%; /* Makes it a circle */
+    font-size: 0.9em;
+    /* border: 1px solid #e9e9e9; */
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 10px rgba(60, 130, 190, 0.5), inset 0 0 5px rgba(255,255,255,0.3);
+    width: 100px; /* Fixed width for circle */
+    height: 100px; /* Fixed height for circle */
+    line-height: 1.2; /* Adjust for text within bubble */
+    animation-name: floatBubble;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    /* animation-duration and animation-delay will be set inline for variety */
+}
+
+.skills-column ul.bubble-container { /* Ensure ul has dimensions for bubbles */
+    min-height: 350px; /* Increased min-height to give bubbles more space */
+}
+
+
+.skills-column ul li i {
+    margin-right: 0; /* Reset margin if text is below icon */
+    margin-bottom: 5px; /* Space between icon and text if stacked */
+    color: #fff; /* Icon color */
+    font-size: 1.5em; /* Larger icons in bubbles */
+    width: auto; /* Reset fixed width */
+    text-align: center;
+}
+
+/* Individual positioning and animation delays will be complex with pure CSS.
+   This will require manually setting top/left and animation-delay for each.
+   Example for a few bubbles (to be applied in HTML or via JS if more dynamic): */
+
+@keyframes floatBubble {
+    0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+    25% { transform: translateY(-10px) translateX(5px) scale(1.05); }
+    50% { transform: translateY(0) translateX(-5px) scale(1); }
+    75% { transform: translateY(10px) translateX(5px) scale(0.95); }
+}
+
+/* Hobbies Section */
+#hobbies .hobby-entry {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    gap: 25px; /* Increased space */
+    background: rgba(45, 45, 45, 0.8); /* Darker, semi-transparent */
+    padding: 25px; /* Increased padding */
+    border-radius: 8px; /* Consistent border-radius */
+    /* border: 1px solid #eee; */
+    border: 1px solid #555;
+    color: #e0e0e0; /* Light text */
+}
+
+#hobbies .hobby-entry img {
+    max-width: 180px; /* Slightly larger image */
+    height: auto;
+    border-radius: 8px; /* Consistent border-radius */
+    border: 2px solid #666; /* Border for hobby image */
+}
+
+#hobbies .hobby-entry .hobby-description {
+    flex: 1;
+}
+
+#hobbies .hobby-entry h3 {
+    font-size: 1.4em; /* Consistent with other subheadings */
+    color: #7fdbff; /* Bright blue */
+    margin-bottom: 10px;
+}
+
+#hobbies .hobby-entry p {
+    font-size: 1em;
+    color: #c0c0c0; /* Lighter paragraph text */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 992px) { /* Medium devices (tablets, less than 992px) */
+    .project-card {
+        width: calc(50% - 30px); /* 2 cards per row */
+    }
+    .skills-column {
+        width: 100%; /* Stack skill columns */
+        margin-bottom: 20px;
+    }
+    .skills-column:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 768px) { /* Small devices (landscape phones, less than 768px) */
+    header nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+    .project-card {
+        width: 100%; /* 1 card per row */
+    }
+    #hobbies .hobby-entry {
+        flex-direction: column; /* Stack image and text */
+        align-items: center; /* Center items when stacked */
+        text-align: center;
+    }
+    #hobbies .hobby-entry img {
+        margin-bottom: 15px;
+    }
+}
+
+/* Placeholder for images directory, no specific CSS needed for the directory itself */
+/* Placeholder for js directory and script.js */
+/* js/script.js can be empty for now or contain: console.log("Portfolio script loaded."); */
