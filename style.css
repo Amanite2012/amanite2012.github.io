@@ -33,11 +33,11 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    filter: blur(8px); /* Blur effect */
+    filter: blur(8px) !important; /* Blur effect - added important in case of conflict */
     object-fit: cover; /* Cover the area, might crop */
 }
 
-/* Optional: Add a semi-transparent overlay on top of the video but behind content, if needed for readability */
+/* Overlay on top of the video but behind content */
 body::before {
     content: "";
     position: fixed;
@@ -51,14 +51,14 @@ body::before {
 
 
 header {
-    background: #333;
+    background: rgba(51, 51, 51, 0.8); /* Made header slightly transparent too */
     color: #fff;
     padding: 1rem 0;
     text-align: center;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000;
+    z-index: 1000; /* High z-index for fixed header */
 }
 
 header nav ul {
@@ -83,8 +83,8 @@ main {
     padding: 20px 0; /* Remove side padding for full-width scroller sections */
     /* background: #fff; Remove fixed background, sections will control their own */
     /* box-shadow: 0 0 10px rgba(0,0,0,0.1); */
-    position: relative; /* Ensure it's above the video's pseudo-element */
-    z-index: 1;
+    position: relative; 
+    z-index: 1; /* Ensure main content is above video and overlay */
 }
 
 section {
@@ -291,27 +291,28 @@ footer a {
     /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); */
     box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* Enhanced shadow for dark theme */
     background: rgba(50, 50, 50, 0.7); /* Semi-transparent dark background for columns */
-    position: relative; /* Needed for absolute positioning of bubbles */
+    position: relative; 
     overflow: hidden; /* Keep bubbles contained */
-    min-height: 300px; /* Ensure columns have some height for bubbles to float in */
+    min-height: 400px; /* Increased min-height for skill column */
+    padding-bottom: 20px; /* Add some padding at the bottom */
 }
 
 .skills-column h3 {
     font-size: 1.4em; /* Slightly larger */
     color: #7fdbff; /* Bright blue, same as project card titles */
-    /* border-bottom: 1px solid #eee; */
     border-bottom: 1px solid #555;
     padding-bottom: 10px;
-    margin-bottom: 20px; /* More space before bubbles start */
+    margin-bottom: 20px; 
     text-align: center;
 }
 
-.skills-column ul {
+.skills-column ul.bubble-container { /* Target specific class */
     list-style: none;
     padding-left: 0;
-    position: relative; /* Container for absolute positioned li */
-    height: 100%; /* Allow ul to fill column for positioning */
-    min-height: 200px; /* Ensure space for bubbles */
+    position: relative; 
+    width: 100%; /* Ensure ul takes full width of column */
+    min-height: 350px; /* Defined space for bubbles, removed height:100% */
+    /* height: 100%; Removed as it can be problematic if parent height is not fixed */
 }
 
 .skills-column ul li {
